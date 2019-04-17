@@ -1,0 +1,127 @@
+/*
+<h3 id="H3_1">
+	<span id="SPAN_2"></span> Key features
+</h3>
+*/
+#H3_1 {
+  bottom: 0px;
+  box-shadow: rgb(152, 152, 152) 0px 2px 7px 1px;
+  box-sizing: border-box;
+  color: rgb(85, 85, 85);
+  cursor: pointer;
+  height: 56px;
+  left: 0px;
+  position: relative;
+  right: 0px;
+  text-decoration: none solid rgb(85, 85, 85);
+  text-size-adjust: 100%;
+  top: 0px;
+  width: 972px;
+  column-rule-color: rgb(85, 85, 85);
+  perspective-origin: 486px 28px;
+  transform-origin: 486px 28px;
+  caret-color: rgb(85, 85, 85);
+  background: rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box
+    border-box;
+  border: 1px solid rgb(1, 161, 218);
+  font: normal normal 400 normal 17.6px / 22.88px Gotham, "Helvetica Neue",
+    Helvetica, Arial, sans-serif;
+  list-style: none outside none;
+  margin: 0px 0px 8px;
+  outline: rgb(85, 85, 85) none 0px;
+  padding: 16px 40px;
+} /*#H3_1*/
+
+#H3_1:after {
+  box-sizing: border-box;
+  color: rgb(85, 85, 85);
+  cursor: pointer;
+  text-decoration: none solid rgb(85, 85, 85);
+  text-size-adjust: 100%;
+  column-rule-color: rgb(85, 85, 85);
+  caret-color: rgb(85, 85, 85);
+  border: 0px none rgb(85, 85, 85);
+  font: normal normal 400 normal 17.6px / 22.88px Gotham, "Helvetica Neue",
+    Helvetica, Arial, sans-serif;
+  list-style: none outside none;
+  outline: rgb(85, 85, 85) none 0px;
+} /*#H3_1:after*/
+
+#H3_1:before {
+  box-sizing: border-box;
+  color: rgb(85, 85, 85);
+  cursor: pointer;
+  text-decoration: none solid rgb(85, 85, 85);
+  text-size-adjust: 100%;
+  column-rule-color: rgb(85, 85, 85);
+  caret-color: rgb(85, 85, 85);
+  border: 0px none rgb(85, 85, 85);
+  font: normal normal 400 normal 17.6px / 22.88px Gotham, "Helvetica Neue",
+    Helvetica, Arial, sans-serif;
+  list-style: none outside none;
+  outline: rgb(85, 85, 85) none 0px;
+} /*#H3_1:before*/
+
+#SPAN_2 {
+  background-position: -48px -4px;
+  bottom: 13px;
+  box-sizing: border-box;
+  color: rgb(85, 85, 85);
+  cursor: pointer;
+  display: block;
+  height: 24px;
+  left: 4.8px;
+  position: absolute;
+  right: 941.203px;
+  text-decoration: none solid rgb(85, 85, 85);
+  text-indent: -99999px;
+  text-size-adjust: 100%;
+  top: 27px;
+  width: 24px;
+  column-rule-color: rgb(85, 85, 85);
+  perspective-origin: 12px 12px;
+  transform-origin: 12px 12px;
+  caret-color: rgb(85, 85, 85);
+  background: rgba(0, 0, 0, 0)
+    url("https://www.avid.com/Content/avid/images/ui-icons_222222_256x240.png")
+    no-repeat scroll -48px -4px / 384px 360px padding-box border-box;
+  border: 0px none rgb(85, 85, 85);
+  font: normal normal 400 normal 17.6px / 22.88px Gotham, "Helvetica Neue",
+    Helvetica, Arial, sans-serif;
+  list-style: none outside none;
+  margin: -10px 0px 0px;
+  outline: rgb(85, 85, 85) none 0px;
+  overflow: hidden;
+} /*#SPAN_2*/
+
+#SPAN_2:after {
+  box-sizing: border-box;
+  color: rgb(85, 85, 85);
+  cursor: pointer;
+  text-decoration: none solid rgb(85, 85, 85);
+  text-indent: -99999px;
+  text-size-adjust: 100%;
+  column-rule-color: rgb(85, 85, 85);
+  caret-color: rgb(85, 85, 85);
+  border: 0px none rgb(85, 85, 85);
+  font: normal normal 400 normal 17.6px / 22.88px Gotham, "Helvetica Neue",
+    Helvetica, Arial, sans-serif;
+  list-style: none outside none;
+  outline: rgb(85, 85, 85) none 0px;
+} /*#SPAN_2:after*/
+
+#SPAN_2:before {
+  box-sizing: border-box;
+  color: rgb(85, 85, 85);
+  cursor: pointer;
+  text-decoration: none solid rgb(85, 85, 85);
+  text-indent: -99999px;
+  text-size-adjust: 100%;
+  column-rule-color: rgb(85, 85, 85);
+  caret-color: rgb(85, 85, 85);
+  border: 0px none rgb(85, 85, 85);
+  font: normal normal 400 normal 17.6px / 22.88px Gotham, "Helvetica Neue",
+    Helvetica, Arial, sans-serif;
+  list-style: none outside none;
+  outline: rgb(85, 85, 85) none 0px;
+} /*#SPAN_2:before*/

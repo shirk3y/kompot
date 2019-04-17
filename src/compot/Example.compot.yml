@@ -1,0 +1,24 @@
+Example:
+  tag: div
+  style:
+    backgoundColor: blue
+    border: 1px solid green
+    fontSize: 25
+  children:
+    - tag: div
+      style:
+        backgroundColor: red
+        fontSize: 18
+      children:
+        - tag: ul
+          style:
+            border: 1px solid yellow
+          children:
+            - tag: li
+              style:
+                padding: 10
+              children: "Foo"
+            - tag: li
+              style:
+                padding: 10
+              children: "Bar"

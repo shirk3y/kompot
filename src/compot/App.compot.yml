@@ -1,24 +1,141 @@
+$import:
+  react-x-ray:
+    default: XRay
+  semantic-ui-css/semantic.min.css:
+    default: SuiCss
+  semantic-ui-react:
+    Button:
+    Container:
+    Divider:
+    Grid:
+    Header:
+    Icon:
+    Image:
+    List:
+    Menu:
+    Table:
+    Responsive:
+    Segment:
+    Sidebar:
+    Visibility:
+  recharts:
+    ResponsiveContainer:
+    CartesianGrid:
+    LineChart:
+    XAxis:
+    YAxis:
+    Line:
+    Tooltip:
+  ./Example.compot.yml:
+    Example:
+  ./StockChart:
+    default: StockChart
+  ./StockChartMock:
+    default: StockChartMock
+  ./SourceTable:
+    default: SourceTable
+
 App:
-  tag: div
-  style:
-    backgoundColor: blue
-    border: 1px solid green
-    fontSize: 25
-  children:
-    - tag: div
-      style:
-        backgroundColor: red
-        fontSize: 18
-      children:
-        - tag: ul
-          style:
-            border: 1px solid yellow
-          children:
-            - tag: li
-              style:
-                padding: 10
-              children: "Foo"
-            - tag: li
-              style:
-                padding: 10
-              children: "Bar"
+  .disabled: true
+  type: XRay
+  render:
+    - type: Top
+    - type: Content
+
+$export:
+  Foo:
+    - .disabled: true
+    - /Content:
+        - /Left:
+            - as: nav
+              .style:
+                padding: 5
+                display:
+            - /Menu.Header:
+            - /Menu.Content:
+                - /Menu.Item:
+
+            - /Menu.Version: $appVersion
+
+        - /Right:
+          as: nav
+          .style:
+            padding: 5
+            display:
+              ~if: [$isMenuVisible, block, none]
+          .:
+            - /Menu.Header:
+            - /Menu.Content:
+                - /Menu.Item:
+
+Top:
+  .pointing: true
+  .secondary: true
+  .style:
+    justifyContent: center
+  type: Menu
+  render:
+    - type: Menu.Item
+      .name: home
+      .active: true
+    - type: Menu.Item
+      .name: charts
+    - type: Menu.Item
+      .name: alarms
+
+Content:
+  .style:
+    margin: 0 24px
+  render:
+    - type: Grid
+      .columns: 16
+      .divided: true
+      .style:
+        minHeight: calc(100vh - 40px)
+      render:
+        - type: Grid.Row
+          .style:
+            paddingTop: 0
+          render:
+            - type: ContentGridColumn
+              .width: 4
+              render:
+                - type: Left
+            - type: ContentGridColumn
+              .width: 12
+              render:
+                - type: Right
+
+ContentGridColumn:
+  type: Grid.Column
+  .style:
+    paddingTop: 14px
+
+Left:
+  render:
+    - type: SourceKnobs
+    - type: SourceList
+
+Right:
+  render:
+    - type: ChartKnobs
+    - type: ChartViewer
+
+ChartViewer:
+  render:
+    - type: ChartWrapper
+
+ChartWrapper:
+  type: StockChartMock
+
+SourceKnobs:
+  render: []
+
+SourceList:
+  type: SourceTable
+  .basic: very
+  .style:
+    cursor: pointer
+
+ChartKnobs:
+  render: []

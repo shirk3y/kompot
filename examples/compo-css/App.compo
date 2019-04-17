@@ -1,0 +1,125 @@
+// @js-function loadFeatures {
+
+// } 
+
+
+@async-action LOAD_FEATURES($limit: 3) {
+
+}
+
+@app($config) {
+
+  :root {
+    App($config);
+  }
+}
+
+@interface features {
+  :array {
+    name: string required;
+    imageUrl: string required url; 
+  }
+}
+
+@component App($config, $state) {
+  :state {
+    array features {
+      name: string required;
+      text: string required;
+      image: string url required; 
+    }
+    blog: {
+      visible: true;
+      array posts {
+        title: "No title";
+        content: "No content";
+      }
+    }
+  }
+  
+  Body($(state.features));
+}
+
+@component Body($features, $logoUrl) {
+  :hooks {
+    @useEffect {
+      @import
+    } 
+  }
+  
+  :style {
+    padding: 20px;
+    margin: 20px;
+    
+    .logo {
+      padding: 50px;
+      margin: 2px;
+      font-size: 8px;
+      
+      img {
+        max-height: 200px;
+      }
+      
+      span {
+        font-size: 26px;
+      }
+    }
+  }
+  
+  Layout {
+    :style {
+      display: flex;
+    }
+    
+    FeatureList($features);
+    
+    .logo {
+      :attr {
+      /* or :props { */
+        onClick: @actions.goHome(true);
+      }
+      img {
+        :attr {
+          src: $logoUrl;
+        }
+        // or 
+        @attr src: $logoUrl;
+      }
+      span {
+        /* "Compo"; */
+        // or
+        content: "Compo";
+        // or
+        @content: "Compo";
+      }
+    }
+  };
+
+}
+
+@component FeatureList($features) {
+  :style {
+    flex: 1 0 0;
+  }
+  @each $feature in $features {
+    FeatureItem{
+      :style {
+        padding: 20px;
+        background: blue;
+      }
+      img {
+        :style {
+          width: 30px;
+          height: 30px;
+          margin: 2em;
+        }
+        :props {
+          src: $(feature.imageUrl);
+        }
+      }
+      span {
+        text: $(feature.name);
+      }
+    }
+  }
+}

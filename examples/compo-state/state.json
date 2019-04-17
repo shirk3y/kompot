@@ -1,0 +1,21 @@
+{
+  "App": [
+    {
+      "features": [
+        {
+          "name": "Portable web components",
+          "imageUrl": "https://image.com/portable.png"
+        },
+        {
+          "name": "Keep design and code in sync",
+          "imageUrl": "https://image.com/sync.png"
+        },
+        {
+          "name": "(POST)CSS based language",
+          "imageUrl": "https://image.com/language.png"
+        }
+      ]
+    }
+  ],
+  "Blog": []
+}
