@@ -26,8 +26,6 @@ $import:
     YAxis:
     Line:
     Tooltip:
-  ./Example.compot.yml:
-    Example:
   ./StockChart:
     default: StockChart
   ./StockChartMock:
@@ -41,32 +39,6 @@ App:
   render:
     - type: Top
     - type: Content
-
-$export:
-  Foo:
-    - .disabled: true
-    - /Content:
-        - /Left:
-            - as: nav
-              .style:
-                padding: 5
-                display:
-            - /Menu.Header:
-            - /Menu.Content:
-                - /Menu.Item:
-
-            - /Menu.Version: $appVersion
-
-        - /Right:
-          as: nav
-          .style:
-            padding: 5
-            display:
-              ~if: [$isMenuVisible, block, none]
-          .:
-            - /Menu.Header:
-            - /Menu.Content:
-                - /Menu.Item:
 
 Top:
   .pointing: true

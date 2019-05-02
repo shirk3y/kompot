@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { App } from "./compot/App.compot.yml";
+import { App } from "./forex/App.compot.yml";
 
 const root = document.createElement("div");
 root.setAttribute("id", "root");

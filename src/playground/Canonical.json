@@ -1,0 +1,44 @@
+{
+  "wo": "0.1",
+  "import": {
+    "recharts": {
+      "ResponsiveContainer": null,
+      "CartesianGrid": null
+    },
+    "./StockChart": {
+      "default": "StockChart"
+    }
+  },
+  "export": {
+    "App": {
+      "element": "div",
+      "schema": {
+        "name": { "type": "string", "required": true, "default": "Unnamed" }
+      },
+      "props": {
+        "style": {
+          "backgroundColor": "red"
+        }
+      },
+      "children": [
+        {
+          "element": "div",
+          "props": {
+            "style": {
+              "padding": "10em"
+            },
+            "onClick": ["$action", "RELOAD_STOCK_CHART"]
+          },
+          "children": "Hello"
+        },
+        {
+          "element": ["$ref", "StockChart"],
+          "props": {
+            "data": ["$state", "chart", "data"],
+            "isLoaded": ["$if", ["$state", "chart", "data"], true, false]
+          }
+        }
+      ]
+    }
+  }
+}

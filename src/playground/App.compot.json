@@ -1,0 +1,171 @@
+{
+  "$import": {
+    "react-x-ray": {
+      "default": "XRay"
+    },
+    "semantic-ui-css/semantic.min.css": {
+      "default": "SuiCss"
+    },
+    "semantic-ui-react": {
+      "Button": null,
+      "Container": null,
+      "Divider": null,
+      "Grid": null,
+      "Header": null,
+      "Icon": null,
+      "Image": null,
+      "List": null,
+      "Menu": null,
+      "Table": null,
+      "Responsive": null,
+      "Segment": null,
+      "Sidebar": null,
+      "Visibility": null
+    },
+    "recharts": {
+      "ResponsiveContainer": null,
+      "CartesianGrid": null,
+      "LineChart": null,
+      "XAxis": null,
+      "YAxis": null,
+      "Line": null,
+      "Tooltip": null
+    },
+    "./StockChart": {
+      "default": "StockChart"
+    },
+    "./StockChartMock": {
+      "default": "StockChartMock"
+    },
+    "./SourceTable": {
+      "default": "SourceTable"
+    }
+  },
+  "App": {
+    ".disabled": true,
+    "type": "XRay",
+    "render": [
+      {
+        "type": "Top"
+      },
+      {
+        "type": "Content"
+      }
+    ]
+  },
+  "Top": {
+    ".pointing": true,
+    ".secondary": true,
+    ".style": {
+      "justifyContent": "center"
+    },
+    "type": "Menu",
+    "render": [
+      {
+        "type": "Menu.Item",
+        ".name": "home",
+        ".active": true
+      },
+      {
+        "type": "Menu.Item",
+        ".name": "charts"
+      },
+      {
+        "type": "Menu.Item",
+        ".name": "alarms"
+      }
+    ]
+  },
+  "Content": {
+    ".style": {
+      "margin": "0 24px"
+    },
+    "render": [
+      {
+        "type": "Grid",
+        ".columns": 16,
+        ".divided": true,
+        ".style": {
+          "minHeight": "calc(100vh - 40px)"
+        },
+        "render": [
+          {
+            "type": "Grid.Row",
+            ".style": {
+              "paddingTop": 0
+            },
+            "render": [
+              {
+                "type": "ContentGridColumn",
+                ".width": 4,
+                "render": [
+                  {
+                    "type": "Left"
+                  }
+                ]
+              },
+              {
+                "type": "ContentGridColumn",
+                ".width": 12,
+                "render": [
+                  {
+                    "type": "Right"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "ContentGridColumn": {
+    "type": "Grid.Column",
+    ".style": {
+      "paddingTop": "14px"
+    }
+  },
+  "Left": {
+    "render": [
+      {
+        "type": "SourceKnobs"
+      },
+      {
+        "type": "SourceList"
+      }
+    ]
+  },
+  "Right": {
+    "render": [
+      {
+        "type": "ChartKnobs"
+      },
+      {
+        "type": "ChartViewer"
+      }
+    ]
+  },
+  "ChartViewer": {
+    "render": [
+      {
+        "type": "ChartWrapper"
+      }
+    ]
+  },
+  "ChartWrapper": {
+    "type": "StockChartMock"
+  },
+  "SourceKnobs": {
+    "render": []
+  },
+  "SourceList": {
+    "type": "SourceTable",
+    ".basic": "very",
+    ".style": {
+      "cursor": "pointer"
+    }
+  },
+  "ChartKnobs": {
+    "render": []
+  }
+}

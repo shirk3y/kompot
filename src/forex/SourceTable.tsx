@@ -16,17 +16,28 @@ const genData = () => {
   return data;
 };
 
+const renderHeaderRow = (columns, sortBy = "SYMBOL") => (
+  <Table.Row>
+    {columns.map(column => (
+      <Table.HeaderCell sorted={column === sortBy ? "ascending" : undefined}>
+        {column}
+      </Table.HeaderCell>
+    ))}
+  </Table.Row>
+);
+
 const renderBodyRow = (cells, i) => ({
   key: cells[0],
   cells
 });
 
 const SourceTable = props => {
+  const headerRow = renderHeaderRow(["SYMBOL", "+/-", "BID", "ASK"]);
   const tableData = genData();
   return (
     <Table
       compact
-      headerRow={["SYMBOL", "+/-", "BID", "ASK"]}
+      headerRow={headerRow}
       renderBodyRow={renderBodyRow}
       tableData={tableData}
       {...props}

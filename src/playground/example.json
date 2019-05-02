@@ -1,0 +1,10 @@
+{
+  "$schema": "./example.schema.json",
+  "_type": "module",
+  "address": {
+    "city": "New York",
+    "state": "State",
+    "street_address": "Jana 2",
+    "$schema": "http://json-schema.org/foo/bar/404#"
+  }
+}

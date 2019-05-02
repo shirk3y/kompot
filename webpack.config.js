@@ -51,7 +51,10 @@ module.exports = {
   resolveLoader: {
     extensions: [".ts", ".js"],
     alias: {
-      "compot-loader": path.resolve(__dirname, "./src/compot-loader")
+      "compot-loader": path.resolve(
+        __dirname,
+        "./src/compot-loader/languages/yaml"
+      )
     }
   },
   output: {
