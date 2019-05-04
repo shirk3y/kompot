@@ -12,7 +12,6 @@ describe("findVars", () => {
 
   Object.entries(TEST_CASES).forEach(([input, output]) => {
     test(input, () => {
-      // expect(findVars("$foo")).toEqual(["foo"]);
       expect(findVars(input)).toEqual(output);
     });
   });

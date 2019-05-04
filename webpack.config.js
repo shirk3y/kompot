@@ -53,7 +53,7 @@ module.exports = {
     alias: {
       "compot-loader": path.resolve(
         __dirname,
-        "./src/compot-loader/languages/yaml"
+        "./src/compot-loader/languages/react"
       )
     }
   },

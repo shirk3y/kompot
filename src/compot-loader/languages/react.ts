@@ -1,12 +1,13 @@
 import yaml from "js-yaml";
 
-import { parseModule } from "./canonical";
+// import { parseModule } from "./canonical";
+import { parseModule } from "./prefixed";
 
 // const appender = createItem => (...args) => {
 
 // }
 
-export default (source, map) => {
+export default function(source, map) {
   const root = yaml.load(source);
 
   const componentLines = [];
@@ -14,13 +15,13 @@ export default (source, map) => {
     componentLines.push(
       `const ${name} = React.createElement(${element}, {...props, ...${JSON.stringify(
         props
-      )}}, \n${children})`
+      )}}, \n${children});`
     );
   };
 
   const importLines = [];
   const handleImport = (module_, name, alias) => {
-    `const ${alias} = require('${module_}').${name};`;
+    importLines.push(`const ${alias} = require('${module_}').${name};`);
   };
 
   const exportLines = [];
@@ -46,4 +47,4 @@ export default (source, map) => {
   console.warn(code);
 
   this.callback(null, code, map);
-};
+}
