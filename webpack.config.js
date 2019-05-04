@@ -10,10 +10,23 @@ module.exports = {
 
   module: {
     rules: [
-      {
-        test: /\.compot.ya?ml$/,
-        use: ["compot-loader"]
-      },
+      // {
+      //   test: /\.compot.ya?ml$/,
+      //   use: ["compot-loader"]
+      // },
+      // {
+      //   test: /\.ya?ml$/,
+      //   use: [{ loader: "yaml" }]
+      // },
+      // {
+      //   test: /\.ya?ml$/,
+      //   use: [
+      //     {
+      //       loader: "file-loader",
+      //       options: {}
+      //     }
+      //   ]
+      // },
       { test: /\.css$/, use: ["style-loader", "css-loader"] },
       { test: /\.(svg|png|eot|woff2?|ttf|ico)$/, use: ["url-loader"] },
       {
@@ -46,17 +59,17 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js", ".jsx", ".css"]
-  },
-  resolveLoader: {
-    extensions: [".ts", ".js"],
+    extensions: [".tsx", ".ts", ".js", ".jsx", ".css", ".yml"],
     alias: {
-      "compot-loader": path.resolve(
-        __dirname,
-        "./src/compot-loader/languages/react"
-      )
+      "compot-loader": path.resolve(__dirname, "./src/compot-loader")
     }
   },
+  // resolveLoader: {
+  //   extensions: [".ts", ".js"],
+  //   alias: {
+  //     "compot-loader": path.resolve(__dirname, "./src/compot-loader/loader")
+  //   }
+  // },
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),

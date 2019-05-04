@@ -1,0 +1,46 @@
+import:
+# react-x-ray:
+#   default: XRay
+# semantic-ui-css/semantic.min.css:
+#   default: SUICSS
+# semantic-ui-react:
+#   Button:
+
+component:
+  Foo:
+    tag: p
+    props:
+      onClick: foo
+  App:
+    props:
+      # key: app
+      style:
+        backgroundColor: blue
+        padding: 10
+    render:
+      - type: Button
+        props:
+          key: foo
+        render: Foo
+      - type: Button
+        props:
+          key: bar
+        render: Bar
+      - type: Button
+        props:
+          key: baz
+        render: Baz
+      - tag: p
+        props:
+          style:
+            padding: 30
+            margin: 10
+            backgroundColor: "#f9f"
+          key: chuj
+        render:
+          - tag: img
+            props:
+              key: iii
+              src: http://dupa.pl
+              width: 60
+              height: 60

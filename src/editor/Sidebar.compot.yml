@@ -1,0 +1,18 @@
+# import:
+#   react-x-ray:
+#     default: XRay
+#   semantic-ui-css/semantic.min.css:
+#     default: SUICSS
+#   semantic-ui-react:
+#     Button:
+
+component:
+  Sidebar:
+    props:
+      style:
+        position: fixed
+        padding: 10
+        right: 0
+        bottom: 0
+        top: 0
+        width: 250
