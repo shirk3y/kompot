@@ -32,20 +32,20 @@ component:
         props:
           key: baz
         children: Baz
-      - tag: p
-        props:
-          style:
-            padding: 30
-            margin: 10
-            backgroundColor: "#f9f"
-          key: chuj
-        children:
-          - tag: img
-            props:
-              key: iii
-              src: http://dupa.pl
-              width: 60
-              height: 60
+      # - tag: p
+      #   props:
+      #     style:
+      #       padding: 30
+      #       margin: 10
+      #       backgroundColor: "#f9f"
+      #     key: chuj
+      #   children:
+      #     - tag: img
+      #       props:
+      #         key: iii
+      #         src: http://dupa.pl
+      #         width: 60
+      #         height: 60
 
   App:
     type: Editor

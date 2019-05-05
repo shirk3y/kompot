@@ -18,12 +18,12 @@ export interface ComponentInfo {
   tag?: string;
   type?: string;
   props: {};
-  children: ChildInfo[];
+  children: NodeInfo[];
 }
 
-export type ChildInfo = ComponentInfo | string;
+export type NodeInfo = ComponentInfo | string;
 
-type ChildInput = ChildInfo | ChildInfo[];
+type ChildInput = NodeInfo | NodeInfo[];
 
 export const parseImports = (root = {}): ImportInfo[] => {
   const imports = [];
@@ -48,7 +48,7 @@ export const parseComponents = (
   rootId,
   imports
 ): ComponentInfo[] => {
-  const normalizeChildren = (children: ChildInput): ChildInfo[] =>
+  const normalizeChildren = (children: ChildInput): NodeInfo[] =>
     (Array.isArray(children) ? children : [children]).filter(c => c);
 
   const parse = (

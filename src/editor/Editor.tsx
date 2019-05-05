@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useRef, createContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  createContext
+} from "react";
 import Children from "react-children-utilities";
 
 import { infoMap } from "../compot-loader/component";
@@ -23,12 +29,7 @@ function recursiveMap(children, fn) {
 
     const grandChildren = (child.props as any).children;
 
-    // console.log({ children, grandChildren });
-
     if (grandChildren) {
-      // child = React.cloneElement(child, {
-      //   children: recursiveMap(child.props.children, fn)
-      // });
       child = React.cloneElement(
         child,
         undefined,
@@ -43,15 +44,29 @@ function recursiveMap(children, fn) {
 const Editor = ({ children }) => {
   const [tree, setTree] = useState({});
 
+  useLayoutEffect(() => {
+    // const child = React.Children.only(children);
+
+    // console.log(infoMap.get(child));
+    const infos = Array.from(
+      document.querySelectorAll("*[data-compot-id]")
+    ).reduce((map, node) => {
+      const info = infoMap.get(node);
+
+      // console.warn({ node, info });
+
+      return map;
+    }, {});
+
+    // const c = Children.deepFilter(children, c => true);
+    // const al = mapRecursive(children, c => c);
+  }, [children]);
+
   // console.log(React.Children.toArray(children));
   // console.log(
   //   Children.deepFilter(children, c => console.log(c, infoMap.get(c)))
   // );
   // Children.deepMap(children, child => console.warn(child));
-
-  const child = React.Children.only(children);
-
-  console.log(infoMap.get(child));
 
   return (
     <CompotEditorContext.Provider
@@ -75,6 +90,13 @@ const Editor = ({ children }) => {
           opacity: 0.8
         }}
       >
+        {Array.from(document.querySelectorAll("*[data-compot-id]")).map(
+          node => (
+            <li style={{ marginLeft: 18 }}>
+              {JSON.stringify(infoMap.get(node))}
+            </li>
+          )
+        )}
         {/* {console.warn(children)} */}
         {/* {recursiveMap(children, child => { */}
         {/* {Children.deepMap(children, child => {
