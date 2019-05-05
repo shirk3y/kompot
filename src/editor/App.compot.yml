@@ -11,6 +11,7 @@ component:
     tag: p
     props:
       onClick: foo
+    children: [Hej, Ha]
   App:
     props:
       # key: app
@@ -21,6 +22,10 @@ component:
       - type: Button
         props:
           key: foo
+          style:
+            background: yellow
+            width: 100
+            height: 100
         children: Foo
       - type: Button
         props:

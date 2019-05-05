@@ -18,6 +18,8 @@ export interface ComponentInfo {
 
 export type ChildInfo = ComponentInfo | string;
 
+type RawChildInfo = ChildInfo | ChildInfo[];
+
 export const parseImports = (root = {}): ImportInfo[] => {
   const imports = [];
 
@@ -40,28 +42,26 @@ export const parseComponents = (
   rootProps = {},
   imports
 ): ComponentInfo[] => {
-  const makeInfo = (node): ComponentInfo => {
-    const { tag = "div", type, props = {}, children } = node;
-    const element = imports[type] || tag;
+  const normalizeChildren = (children: RawChildInfo): ChildInfo[] =>
+    (Array.isArray(children) ? children : [children]).filter(c => c);
 
-    const children_ = (Array.isArray(children)
-      ? children
-      : children
-      ? [children]
-      : []
-    ).map(n => makeInfo(n));
-
-    return {
-      type: element,
-      props: { ...rootProps, ...props },
-      children: children_
-    };
-  };
+  const parse = ({
+    tag = "div",
+    type,
+    props = {},
+    children
+  }): ComponentInfo => ({
+    type: imports[type] || tag,
+    props: { ...rootProps, ...props },
+    children: normalizeChildren(children).map(n =>
+      typeof n === "string" ? n : parse(n)
+    )
+  });
 
   const components = [];
 
-  for (const [name, node] of Object.entries(root[NodeType.COMPONENT] || {})) {
-    components.push({ name, ...makeInfo(node) });
+  for (const [name, node] of Object.entries(root[NodeType.COMPONENT])) {
+    components.push({ name, ...parse(node as ComponentInfo) });
   }
   return components;
 };
