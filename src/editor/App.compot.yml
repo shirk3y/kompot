@@ -5,14 +5,11 @@ import:
     default: SUICSS
   semantic-ui-react:
     Button:
+  ./Editor:
+    default: Editor
 
 component:
-  Foo:
-    tag: p
-    props:
-      onClick: foo
-    children: [Hej, Ha]
-  App:
+  Main:
     props:
       # key: app
       style:
@@ -49,3 +46,8 @@ component:
               src: http://dupa.pl
               width: 60
               height: 60
+
+  App:
+    type: Editor
+    children:
+      - type: Main

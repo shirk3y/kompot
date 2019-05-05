@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef, createContext } from "react";
 import Children from "react-children-utilities";
 
+import { infoMap } from "../compot-loader/component";
+
 export const CompotEditorContext = createContext({
   onMount: void 0,
   onUnmount: void 0
@@ -41,7 +43,15 @@ function recursiveMap(children, fn) {
 const Editor = ({ children }) => {
   const [tree, setTree] = useState({});
 
-  console.log(React.Children.toArray(children));
+  // console.log(React.Children.toArray(children));
+  // console.log(
+  //   Children.deepFilter(children, c => console.log(c, infoMap.get(c)))
+  // );
+  // Children.deepMap(children, child => console.warn(child));
+
+  const child = React.Children.only(children);
+
+  console.log(infoMap.get(child));
 
   return (
     <CompotEditorContext.Provider
@@ -59,7 +69,7 @@ const Editor = ({ children }) => {
           position: "fixed",
           top: 0,
           bottom: 0,
-          left: 0,
+          right: 0,
           width: 300,
           backgroundColor: "#ddd",
           opacity: 0.8
@@ -67,7 +77,7 @@ const Editor = ({ children }) => {
       >
         {/* {console.warn(children)} */}
         {/* {recursiveMap(children, child => { */}
-        {Children.deepMap(children, child => {
+        {/* {Children.deepMap(children, child => {
           // {mapRecursive(children, child => {
           const {
             type: { _compot }
@@ -85,7 +95,7 @@ const Editor = ({ children }) => {
           // console.warn("no compot", child);
 
           return null;
-        })}
+        })} */}
       </ul>
       <div>{children}</div>
     </CompotEditorContext.Provider>

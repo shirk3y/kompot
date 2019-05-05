@@ -3,6 +3,8 @@ enum NodeType {
   COMPONENT = "component"
 }
 
+export type Scope = Readonly<{ [symbol: string]: any }>;
+
 export interface ImportInfo {
   alias: string;
   symbol: string;
@@ -10,15 +12,18 @@ export interface ImportInfo {
 }
 
 export interface ComponentInfo {
+  id: string;
   name?: string;
-  type: string | (() => any);
+  // displayName?: string;
+  tag?: string;
+  type?: string;
   props: {};
   children: ChildInfo[];
 }
 
 export type ChildInfo = ComponentInfo | string;
 
-type RawChildInfo = ChildInfo | ChildInfo[];
+type ChildInput = ChildInfo | ChildInfo[];
 
 export const parseImports = (root = {}): ImportInfo[] => {
   const imports = [];
@@ -40,28 +45,33 @@ export const parseImports = (root = {}): ImportInfo[] => {
 export const parseComponents = (
   root = {},
   rootProps = {},
+  rootId,
   imports
 ): ComponentInfo[] => {
-  const normalizeChildren = (children: RawChildInfo): ChildInfo[] =>
+  const normalizeChildren = (children: ChildInput): ChildInfo[] =>
     (Array.isArray(children) ? children : [children]).filter(c => c);
 
-  const parse = ({
-    tag = "div",
+  const parse = (
+    { tag, type, props, name, children }: any,
+    id
+  ): ComponentInfo => ({
+    id,
+    tag,
+    // displayName: name || tag,
     type,
-    props = {},
-    children
-  }): ComponentInfo => ({
-    type: imports[type] || tag,
     props: { ...rootProps, ...props },
-    children: normalizeChildren(children).map(n =>
-      typeof n === "string" ? n : parse(n)
+    children: normalizeChildren(children).map((child, index) =>
+      typeof child === "string" ? child : parse(child, `${id}.${index}`)
     )
   });
 
   const components = [];
 
   for (const [name, node] of Object.entries(root[NodeType.COMPONENT])) {
-    components.push({ name, ...parse(node as ComponentInfo) });
+    components.push({
+      name,
+      ...parse(node as ComponentInfo, `${rootId}:${name}`)
+    });
   }
   return components;
 };

@@ -2,11 +2,11 @@ import yaml from "js-yaml";
 import { stringifyRequest } from "loader-utils";
 import { parseImports, parseComponents } from "../compot-loader/parser";
 
-export default function(source, map) {
+export default function compotWebpackLoader(source, map) {
   const root = yaml.load(source);
   const rootId = JSON.parse(
     stringifyRequest(this, this.request.replace(/^.+?!/, ""))
-  );
+  ).replace(/(^\.\/|\.compot\.yml)/gi, "");
 
   const globalImportsCode = `
     import React from 'react';
@@ -18,20 +18,23 @@ export default function(source, map) {
   const importsCode = imports
     .map(
       info =>
-        `const ${info.alias} = require(${JSON.stringify(info.module)}).${
+        `const ${info.alias} = require(${stringify(info.module)}).${
           info.symbol
         };`
     )
-    .join("\n");
+    .join("\n\n");
 
-  const components = parseComponents(root, {}, imports);
+  const components = parseComponents(root, {}, rootId, imports);
 
   const componentsCode = components
     .map(
       info =>
-        `export const ${info.name} = createComponent(${JSON.stringify(info)});`
+        `export const ${info.name} = createComponent(
+          ${stringify(info)},
+          { ${findTypes(info).join(", ")} }
+        );`
     )
-    .join("\n");
+    .join("\n\n");
 
   const code = `
     ${globalImportsCode}
@@ -41,5 +44,25 @@ export default function(source, map) {
     ${componentsCode}
   `;
 
+  console.info(code);
+
   this.callback(null, code, map);
 }
+
+const stringify = obj => JSON.stringify(obj, undefined, 2);
+
+const findTypes = info => {
+  let types = [];
+
+  if (info.type) {
+    types.push(info.type);
+  }
+
+  if (info.children) {
+    info.children.forEach(childInfo => {
+      types = [...types, ...findTypes(childInfo)];
+    });
+  }
+
+  return Array.from(new Set(types));
+};
