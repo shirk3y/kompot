@@ -1,10 +1,10 @@
 import:
-# react-x-ray:
-#   default: XRay
-# semantic-ui-css/semantic.min.css:
-#   default: SUICSS
-# semantic-ui-react:
-#   Button:
+  react-x-ray:
+    default: XRay
+  semantic-ui-css/semantic.min.css:
+    default: SUICSS
+  semantic-ui-react:
+    Button:
 
 component:
   Foo:
@@ -17,19 +17,19 @@ component:
       style:
         backgroundColor: blue
         padding: 10
-    render:
+    children:
       - type: Button
         props:
           key: foo
-        render: Foo
+        children: Foo
       - type: Button
         props:
           key: bar
-        render: Bar
+        children: Bar
       - type: Button
         props:
           key: baz
-        render: Baz
+        children: Baz
       - tag: p
         props:
           style:
@@ -37,7 +37,7 @@ component:
             margin: 10
             backgroundColor: "#f9f"
           key: chuj
-        render:
+        children:
           - tag: img
             props:
               key: iii

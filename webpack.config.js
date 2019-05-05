@@ -10,10 +10,10 @@ module.exports = {
 
   module: {
     rules: [
-      // {
-      //   test: /\.compot.ya?ml$/,
-      //   use: ["compot-loader"]
-      // },
+      {
+        test: /\.compot.ya?ml$/,
+        use: ["compot-loader"]
+      },
       // {
       //   test: /\.ya?ml$/,
       //   use: [{ loader: "yaml" }]
@@ -64,12 +64,12 @@ module.exports = {
       "compot-loader": path.resolve(__dirname, "./src/compot-loader")
     }
   },
-  // resolveLoader: {
-  //   extensions: [".ts", ".js"],
-  //   alias: {
-  //     "compot-loader": path.resolve(__dirname, "./src/compot-loader/loader")
-  //   }
-  // },
+  resolveLoader: {
+    extensions: [".ts", ".js"],
+    alias: {
+      "compot-loader": path.resolve(__dirname, "./src/compot-loader/loader")
+    }
+  },
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
