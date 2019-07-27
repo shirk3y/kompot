@@ -1,0 +1,91 @@
+import:
+  lodash:
+    keyBy:
+    pick:
+  ./api:
+    syncTodos: apiSyncTodos
+  ./reducers:
+    todosReducer:
+  ./model:
+    createTodoId:
+
+types:
+  - TODO_CREATE
+  - TODO_UPDATE
+  - TODO_DELETE
+  - TODO_TOGGLE
+  - TODO_SYNC
+  - TODO_SYNC/ERROR
+  - TODO_SYNC/DONE
+
+actions:
+  createTodo:
+    type: TODO_CREATE
+    args: [text]
+
+  setTodoText:
+    type: TODO_UPDATE
+    args: [id, text]
+
+  deleteTodo:
+    type: TODO_DELETE
+    args: [id]
+
+  toggleTodo:
+    type: TODO_TOGGLE
+    args: [id]
+
+  syncTodos:
+    type: TODO_SYNC
+    args: [after]
+    promise: $apiSyncTodos
+    errorAction:
+      type: TODO_SYNC/ERROR
+    doneAction:
+      type: TODO_SYNC/DONE
+      args: [todos]
+
+state:
+  todos:
+    initial:
+      byId: {}
+      ids: []
+      isLoading: false
+      isError: false
+
+    reducer:
+      TODO_CREATE:
+        - vars:
+          todoId: [^createTodoId, 12]
+        - push: [$state.ids, $todoId]
+        - set:
+            - $state.byId.$(todoId)
+            - id: $todoId
+              text: $action.text
+              done: false
+
+      TODO_UPDATE:
+        - set: [$state.byId.$($action.id).text, $action.text]
+
+      TODO_TOGGLE:
+        - set:
+            - $state.byId.$(action.id).done,
+            - [^not, $state.byId.$(action.id).done],
+
+      TODO_DELETE:
+        - unset: [$state.byId.$(action.id)]
+        - pull: [$state.ids, $action.id]
+
+      TODO_SYNC:
+        - set: [$state.isLoading, true]
+
+      TODO_SYNC/DONE:
+        - set: [$state.isLoading, false]
+        - set: [$state.byId, [^keyBy, $action.todos, id]]
+        - set: [$state.ids, [^pick, $action.todos, id]]
+
+      TODO_SYNC/ERROR:
+        - set: [$state.isLoading, false]
+        - set: [$state.isError, $action.error]
+
+      default: $todosReducer

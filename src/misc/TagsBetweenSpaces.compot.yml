@@ -1,0 +1,28 @@
+import react-dom: [render, test]
+import ./Box: Box
+
+compot.component App:
+  # $
+
+  .Box:
+    border: [15, 0, 0, 5]
+    background:
+      url: http://images.com/bg.gif
+    padding: [10, 5]
+
+    .Sidebar:
+      background: 0x777777
+
+    .Content:
+      $tag: article
+      background: =$theme.bg1
+
+    .Footer:
+
+  .Footer:
+    $data:
+      counter: [=useState, 0]
+      disclaimer: [=useSelector, $selectDisclaimer]
+
+    color: black
+    children: FOOTER

@@ -1,6 +1,10 @@
 import yaml from "js-yaml";
 import { stringifyRequest } from "loader-utils";
-import { parseImports, parseComponents } from "../compot-loader/parser";
+import {
+  // parseImports,
+  // parseComponents,
+  parseModule
+} from "../compot-loader/parser";
 
 export default function compotWebpackLoader(source, map) {
   const root = yaml.load(source);
@@ -13,9 +17,10 @@ export default function compotWebpackLoader(source, map) {
     import { createComponent } from "../compot-loader/component";
   `;
 
-  const imports = parseImports(root);
+  const moduleInfo = parseModule(root, rootId);
+  // const imports = parseImports(root);
 
-  const importsCode = imports
+  const importsCode = moduleInfo.imports
     .map(
       info =>
         `const ${info.alias} = require(${stringify(info.module)}).${
@@ -24,9 +29,9 @@ export default function compotWebpackLoader(source, map) {
     )
     .join("\n\n");
 
-  const components = parseComponents(root, {}, rootId, imports);
+  // const components = parseComponents(root, {}, rootId, imports);
 
-  const componentsCode = components
+  const componentsCode = moduleInfo.components
     .map(
       info =>
         `export const ${info.name} = createComponent(
