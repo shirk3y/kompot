@@ -54,7 +54,11 @@ export default function compotWebpackLoader(source, map) {
   this.callback(null, code, map);
 }
 
-const stringify = obj => JSON.stringify(obj, undefined, 2);
+const stringify = obj => {
+  const json = JSON.stringify(obj, undefined, 2);
+
+  return json.replace(/"\$([^"]+)"/g, "$1");
+};
 
 const findTypes = info => {
   let types = [];

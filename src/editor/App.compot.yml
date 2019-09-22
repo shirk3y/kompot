@@ -47,8 +47,8 @@ component:
       #         src: http://dupa.pl
       #         width: 60
       #         height: 60
-
   App:
-    type: Editor
-    children:
-      - type: Main
+    type: Main
+    # type: Editor
+    # children:
+    #   - type: Main

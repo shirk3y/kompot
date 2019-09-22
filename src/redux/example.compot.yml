@@ -39,11 +39,26 @@ actions:
     type: TODO_SYNC
     args: [after]
     promise: $apiSyncTodos
-    errorAction:
+    error:
       type: TODO_SYNC/ERROR
-    doneAction:
+    done:
       type: TODO_SYNC/DONE
       args: [todos]
+      
+_actions:
+  TODO_CREATE:
+    schema:
+      text:
+        type: string
+        default: No content
+        
+  TODO_UPDATE:
+    schema:
+      id:
+        type: id
+      text:
+        type: string
+        default: No content
 
 state:
   todos:
@@ -56,7 +71,7 @@ state:
     reducer:
       TODO_CREATE:
         - vars:
-          todoId: [^createTodoId, 12]
+          todoId: [=createTodoId, 12]
         - push: [$state.ids, $todoId]
         - set:
             - $state.byId.$(todoId)
@@ -70,7 +85,7 @@ state:
       TODO_TOGGLE:
         - set:
             - $state.byId.$(action.id).done,
-            - [^not, $state.byId.$(action.id).done],
+            - [=not, $state.byId.$(action.id).done],
 
       TODO_DELETE:
         - unset: [$state.byId.$(action.id)]
@@ -81,8 +96,8 @@ state:
 
       TODO_SYNC/DONE:
         - set: [$state.isLoading, false]
-        - set: [$state.byId, [^keyBy, $action.todos, id]]
-        - set: [$state.ids, [^pick, $action.todos, id]]
+        - set: [$state.byId, [=keyBy, $action.todos, id]]
+        - set: [$state.ids, [=pick, $action.todos, id]]
 
       TODO_SYNC/ERROR:
         - set: [$state.isLoading, false]
