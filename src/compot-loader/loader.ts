@@ -1,10 +1,6 @@
 import yaml from "js-yaml";
 import { stringifyRequest } from "loader-utils";
-import {
-  // parseImports,
-  // parseComponents,
-  parseModule
-} from "../compot-loader/parser";
+import { parseModule } from "../compot-loader/parser";
 
 export default function compotWebpackLoader(source, map) {
   const root = yaml.load(source);
@@ -14,30 +10,29 @@ export default function compotWebpackLoader(source, map) {
 
   const globalImportsCode = `
     import React from 'react';
-    import { createComponent } from "../compot-loader/component";
+    import { renderComponent } from "../compot-loader/component";
   `;
 
   const moduleInfo = parseModule(root, rootId);
-  // const imports = parseImports(root);
 
   const importsCode = moduleInfo.imports
     .map(
       info =>
-        `const ${info.alias} = require(${stringify(info.module)}).${
-          info.symbol
+        `const ${info.alias} = require(${stringify(info.module)})${
+          info.symbol === "*" ? "" : "." + info.symbol
         };`
     )
     .join("\n\n");
 
-  // const components = parseComponents(root, {}, rootId, imports);
-
   const componentsCode = moduleInfo.components
     .map(
       info =>
-        `export const ${info.name} = createComponent(
-          ${stringify(info)},
-          { ${findTypes(info).join(", ")} }
-        );`
+        `export function ${info.name}(props) { 
+          return renderComponent(
+            ${stringify(info)},
+            props
+          );
+        };`
     )
     .join("\n\n");
 
@@ -47,6 +42,8 @@ export default function compotWebpackLoader(source, map) {
     ${importsCode}
    
     ${componentsCode}
+    
+    console.log({garaz});
   `;
 
   console.info(code);
@@ -58,20 +55,4 @@ const stringify = obj => {
   const json = JSON.stringify(obj, undefined, 2);
 
   return json.replace(/"\$([^"]+)"/g, "$1");
-};
-
-const findTypes = info => {
-  let types = [];
-
-  if (info.type) {
-    types.push(info.type);
-  }
-
-  if (info.children) {
-    info.children.forEach(childInfo => {
-      types = [...types, ...findTypes(childInfo)];
-    });
-  }
-
-  return Array.from(new Set(types));
 };

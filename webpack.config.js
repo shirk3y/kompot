@@ -28,11 +28,12 @@ module.exports = {
       //   ]
       // },
       { test: /\.css$/, use: ["style-loader", "css-loader"] },
-      { test: /\.(svg|png|eot|woff2?|ttf|ico)$/, use: ["url-loader"] },
+      { test: /\.(svg|eot|woff2?|ttf|ico)$/, use: ["url-loader"] },
       {
         test: /\.(c|d|t)sv$/,
         use: [{ loader: "dsv-loader", query: { delimiter: "\t" } }]
       },
+      { test: /\.(png|svg|jpg|gif)$/, use: ["file-loader"] },
       {
         test: /\.[jt]sx?$/,
         use: [

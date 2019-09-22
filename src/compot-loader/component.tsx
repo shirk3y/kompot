@@ -1,41 +1,27 @@
-import { createElement } from "react";
+import { jsx } from "@emotion/core";
 
 import { ComponentInfo } from "./parser";
 
 export const infoMap = new WeakMap();
 
-export const createComponent = (info: ComponentInfo, types: {}) => {
-  const component = props => {
-    if (typeof info === "string") {
-      return info;
-    }
+export const renderComponent = (info: ComponentInfo, props?: any) => {
+  if (typeof info === "string") {
+    return info;
+  }
 
-    const {
-      id,
-      type,
-      tag = "div",
-      props: internalProps,
-      children: childInfos
-    } = info;
+  const { id, type = "div", props: internalProps, children: childInfos } = info;
 
-    const children = childInfos.map(childInfo =>
-      typeof childInfo === "string"
-        ? childInfo
-        : createComponent(childInfo, types)({})
-    );
+  const children = childInfos.map(childInfo =>
+    typeof childInfo === "string" ? childInfo : renderComponent(childInfo)
+  );
 
-    const element = createElement(
-      type ? types[type] : tag,
-      { ...internalProps, ...props, "data-compot-id": id },
-      ...children
-    );
+  const element = jsx(
+    type,
+    { ...internalProps, ...props, "data-compot-id": id },
+    ...children
+  );
 
-    infoMap.set(element, info);
+  infoMap.set(element, info);
 
-    return element;
-  };
-
-  component.displayName = info.id;
-
-  return component;
+  return element;
 };

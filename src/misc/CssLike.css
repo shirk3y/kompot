@@ -1,0 +1,23 @@
+
+component Top {
+
+  input {
+    string company;
+    int year {
+      min-value: 2005;
+    }
+  }
+
+  style {
+    padding: 10px; 
+    font-size: 10px;
+  }
+  
+  component Logo {
+
+  }
+  
+  component Menu {
+    
+  }
+}

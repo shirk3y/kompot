@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/core": "7.2.2",
-    "@emotion/core": "^10.0.14",
+    "@emotion/core": "^10.0.17",
     "@emotion/styled": "^10.0.14",
     "@microsoft/fast-tooling-react": "^1.4.0",
     "@svgr/webpack": "4.1.0",
@@ -25,6 +25,7 @@
     "@types/react": "^16.8.13",
     "@types/react-dev-utils": "^7.0.1",
     "@types/react-dom": "^16.8.4",
+    "@types/react-router-dom": "^4.3.5",
     "@types/recharts": "^1.1.16",
     "@types/resolve": "0.0.8",
     "@types/terser-webpack-plugin": "^1.2.1",
@@ -63,6 +64,7 @@
     "filewatcher-webpack-plugin": "^1.2.0",
     "fork-ts-checker-webpack-plugin-alt": "0.4.14",
     "fs-extra": "7.0.1",
+    "glamor": "^2.20.40",
     "html-webpack-plugin": "^4.0.0-beta.5",
     "html-webpack-root-plugin": "^0.10.0",
     "identity-obj-proxy": "3.0.0",
@@ -72,6 +74,7 @@
     "jest-watch-typeahead": "^0.2.1",
     "js-yaml": "^3.12.1",
     "json-loader": "^0.5.7",
+    "jsxstyle": "^2.1.6",
     "lodash": "^4.17.11",
     "lodash-es": "^4.17.11",
     "mini-css-extract-plugin": "0.5.0",
@@ -123,15 +126,7 @@
     "yaml-loader": "^0.5.0"
   },
   "scripts": {
-    "start": "nodemon -V  --ignore component.tsx --watch ./src/compot-loader --watch ./package.json --watch ./webpack.config.js --ext ts --exec ./node_modules/.bin/ts-node src/server.ts",
-    "hhstart": "ts-node src/server.ts",
-    "ustart": "webpack-dev-server --devtool eval --hot --inline",
-    "ystart": "webpack-dev-server --config ./webpack.config.js",
-    "xstart:dev": "nodemon --watch config --exec 'webpack-dev-server --config ./config/webpack.config.js'",
-    "xstart": "cross-env BROWSER=none node scripts/start.js",
-    "xbuild": "node scripts/build.js",
-    "xtest": "node scripts/test.js",
-    "test": "jest"
+    "start": "nodemon -V  --ignore component.tsx --watch ./src/compot-loader --watch ./package.json --watch ./webpack.config.js --watch ./src/server.ts --ext ts --exec ./node_modules/.bin/ts-node src/server.ts"
   },
   "eslintConfig": {
     "extends": "react-app"

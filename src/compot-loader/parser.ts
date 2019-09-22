@@ -1,3 +1,7 @@
+import { isString } from "util";
+import { css as glamorCss } from "glamor";
+import { View } from "glamor/jsxstyle";
+
 enum NodeType {
   IMPORT = "import",
   COMPONENT = "component"
@@ -20,8 +24,7 @@ export interface ImportInfo {
 export interface ComponentInfo {
   id: string;
   name?: string;
-  // displayName?: string;
-  tag?: string;
+  css?: any; // todo: mapping
   type?: string;
   props: {};
   children: NodeInfo[];
@@ -50,12 +53,20 @@ export const parseImports = (root = {}): ImportInfo[] => {
   for (const [module, moduleInfo] of Object.entries(
     root[NodeType.IMPORT] || {}
   )) {
-    for (const [symbol, alias] of Object.entries(moduleInfo)) {
+    if (isString(moduleInfo)) {
       imports.push({
-        alias: alias || symbol,
-        symbol,
+        alias: moduleInfo,
+        symbol: "default",
         module
       });
+    } else {
+      for (const [symbol, alias] of Object.entries(moduleInfo)) {
+        imports.push({
+          alias: alias || symbol,
+          symbol,
+          module
+        });
+      }
     }
   }
   return imports;
@@ -67,16 +78,19 @@ export const parseComponents = (
   rootId,
   imports
 ): ComponentInfo[] => {
+  console.log({ View });
   const parse = (
-    { tag, type, props, name, children }: any,
+    { type, props, name, css, children }: any,
     id
   ): ComponentInfo => ({
     id,
-    tag,
     name,
-    // displayName: name || tag,
     type,
-    props: { ...rootProps, ...props },
+    props: {
+      ...rootProps,
+      ...props,
+      css
+    },
     children: normalizeChildren(children).map((child, index) =>
       typeof child === "string" ? child : parse(child, `${id}.${index}`)
     )

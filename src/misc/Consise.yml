@@ -1,0 +1,33 @@
+# Menu:
+#   type: nav
+#   props:
+#     style:
+#       display: flex
+#       alignItems: center
+#   children:
+#     - type: $MenuLink
+#       props:
+#         to: /
+#       children: Strona główna
+#     - type: $MenuLink
+#       props:
+#         to: /kontakt
+#       children: Kontakt
+
+Top:
+  - div
+  - href: http://google.com
+  - - $Menu
+    - display: flex
+      align-items: center
+      role: menu
+    - - $MenuLink
+      - to: /
+      - Strona główna
+    - - $MenuLink
+      - to: /
+      - Strona główna
+
+Menu:
+  - nav
+  -
